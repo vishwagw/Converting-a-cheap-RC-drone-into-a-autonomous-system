@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>P8 PRO Drone Controller</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🚁 P8 PRO Drone Controller</h1>
+      <div class="sub">Desktop mode</div>
+    </header>
+
+    <section class="connection">
+      <label for="ports">Arduino Port</label>
+      <select id="ports"></select>
+      <button id="refresh">Refresh</button>
+      <button id="connect">Connect</button>
+      <button id="disconnect" disabled>Disconnect</button>
+      <div id="status" class="status disconnected">● Disconnected</div>
+    </section>
+
+    <section class="controls">
+      <div class="left">
+        <div class="input-row">
+          <input id="cmd-input" placeholder="Type a command (or use quick buttons)" />
+          <button id="send">Send</button>
+        </div>
+
+        <div class="quick">
+          <button class="quick-btn" data-cmd="TAKEOFF">Take Off</button>
+          <button class="quick-btn" data-cmd="LAND">Land</button>
+          <button class="quick-btn" data-cmd="STOP">Stop</button>
+          <button class="quick-btn" data-cmd="UP">Up</button>
+          <button class="quick-btn" data-cmd="DOWN">Down</button>
+          <button class="quick-btn" data-cmd="FORWARD">Forward</button>
+          <button class="quick-btn" data-cmd="BACKWARD">Backward</button>
+          <button class="quick-btn" data-cmd="LEFT">Left</button>
+          <button class="quick-btn" data-cmd="RIGHT">Right</button>
+        </div>
+
+        <div class="voice-controls">
+          <button id="voice-start">Start Voice</button>
+          <button id="voice-stop" disabled>Stop Voice</button>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="card">
+          <h3>Status</h3>
+          <div>Armed: <span id="armed">No</span></div>
+          <div>Flying: <span id="flying">No</span></div>
+          <div>Last: <span id="last">None</span></div>
+        </div>
+
+        <div class="card log">
+          <h3>Activity Log</h3>
+          <div id="log" class="logbox"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <small>Local desktop UI using pywebview</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
