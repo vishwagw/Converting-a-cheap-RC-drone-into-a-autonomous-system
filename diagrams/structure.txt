@@ -1,0 +1,24 @@
+Laptop (Python/C++) ←→ USB ←→ Arduino (Nano/Uno) ←→ nRF24L01+ ←→ 2.4GHz Radio ←→ Drone Receiver
+```
+
+## Hardware Setup
+
+### Components Needed
+1. **Arduino Nano or Uno**
+2. **nRF24L01+ module** (preferably with external antenna for better range)
+3. **10μF capacitor** (across VCC/GND of nRF24L01+ for stability)
+4. **USB cable** for Arduino-to-laptop connection
+5. Optional: **nRF24L01+ adapter board** with voltage regulator
+
+### nRF24L01+ Wiring to Arduino
+```
+nRF24L01+  →  Arduino Nano/Uno
+--------------------------------
+VCC        →  3.3V (IMPORTANT: NOT 5V!)
+GND        →  GND
+CE         →  Pin 9
+CSN        →  Pin 10
+SCK        →  Pin 13
+MOSI       →  Pin 11
+MISO       →  Pin 12
+IRQ        →  Not connected (optional)

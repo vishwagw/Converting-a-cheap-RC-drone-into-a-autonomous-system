@@ -1,0 +1,85 @@
+nRF24L01+ Module
+     ___________
+    |  ANTENNA  |
+    |           |
+    |  nRF24L01+|
+    |___________|
+     | | | | | |
+     1 2 3 4 5 6
+     | | | | | |
+     V G C C S M
+     C N E S C O
+     C D   N K S
+           |   I
+           |___| 
+            |||
+    100μF  [|||]  <- Capacitor here
+    (-)     |||     (Short legs, close to module)
+            |||
+    ________|_|________
+    |      | |        |
+    |     GND VCC     |
+    |   Arduino Board |
+    |_________________|
+```
+
+### Installation Tips
+1. **Polarity matters!** 
+   - **Negative (-)** leg → GND
+   - **Positive (+)** leg → VCC (3.3V)
+   - The negative leg is usually shorter and marked with a stripe on the capacitor body
+
+2. **Keep leads short** - solder the capacitor as close to the nRF24L01+ module as possible for maximum effectiveness
+
+3. **Double-check voltage rating** - ensure your 100μF capacitor is rated for at least 6.3V (10V or 16V is common and fine)
+
+## Updated Wiring Diagram
+```
+Arduino Nano/Uno          nRF24L01+
+-----------------         ----------
+    3.3V  ────────────────── VCC ──┐
+                                   │
+    GND   ────────────────── GND ──┤
+                                   │
+    D9    ────────────────── CE    │
+    D10   ────────────────── CSN   │
+    D13   ────────────────── SCK   │
+    D11   ────────────────── MOSI  │
+    D12   ────────────────── MISO  │
+                                   │
+    100μF Capacitor (electrolytic) │
+    (+) ────────────────────────────┘
+    (-) ────────────────────────────┐
+                                   │
+                            GND ───┘
+```
+
+## Additional Power Considerations
+
+Since you have 100μF capacitors, here are some extra tips:
+
+### 1. **Multiple Capacitors** (Optional but recommended)
+If you have stability issues, you can use multiple capacitors in parallel:
+- 100μF electrolytic (bulk capacitance - handles large current spikes)
+- 0.1μF ceramic (if available - handles high-frequency noise)
+```
+VCC ──┬── 100μF ──┬── GND
+      │           │
+      └── 0.1μF ──┘
+```
+
+### 2. **External Power for nRF24L01+ with PA+LNA**
+If you're using the nRF24L01+ with external antenna (PA+LNA version), it draws more current. Consider:
+
+**Option A: Power from Arduino 3.3V** (your current setup)
+- Good for basic/standard nRF24L01+ modules
+- May struggle with PA+LNA modules under heavy load
+- Your 100μF cap helps significantly
+
+**Option B: Separate 3.3V regulator** (if you have power issues)
+```
+Arduino 5V ──→ AMS1117-3.3 ──→ nRF24L01+ VCC
+                    |
+                   GND ──────→ Common GND
+                    |
+                  100μF
